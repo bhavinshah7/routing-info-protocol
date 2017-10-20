@@ -14,8 +14,8 @@ public class Trigger extends TimerTask {
 
 	private DatagramSocket socket;
 	private List<Node> neighbors;
-//	private int port;
 	private RoutingService rs = RoutingService.getInstance();
+	
 	
 	public Trigger(DatagramSocket soc, List<Node> neighborList) throws SocketException {
 		socket = new DatagramSocket();
@@ -26,7 +26,7 @@ public class Trigger extends TimerTask {
 	public void run() {
 		// publish routing table here.
 		for (Node n : neighbors) {
-			sendObj(rs.getRoutingTable(), n.getIp(), n.getPort());
+			sendObj(rs.getRoutingTable(n.getAddress()), n.getAddress(), n.getPort());				
 		}		
 	}
 
@@ -37,11 +37,12 @@ public class Trigger extends TimerTask {
 			
 			oos.writeObject(obj);
 			byte[] data = baos.toByteArray();
+			System.out.println("RT size: " + data.length + " bytes");
 			
 			DatagramPacket packet = new DatagramPacket(data, data.length, ip, port);
 			socket.send(packet);
 			
-			System.out.println("Object published to [" + ip + ":" + port + "] ");
+			System.out.println("RT published to [" + ip + " " + port + "] ");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

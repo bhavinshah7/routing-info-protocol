@@ -12,7 +12,7 @@ public class RIPServer implements Runnable {
 
 	private DatagramSocket ds;
 	private int port;
-	private byte[] buffer = new byte[1024];
+	private byte[] buffer = new byte[2048];
 
 	public RIPServer(int udpPort) throws SocketException {
 		port = udpPort;
