@@ -12,7 +12,7 @@ Following functionalities are supported:
 3) CIDR
 4) Route message broadcasts
 5) Recovery from failed links and router, if alternate routes are available 
-6) Split horizon with poisoned reverse, to avoid count to infinity problem 
+6) Split-horizon routing with poison reverse, to avoid count to infinity problem 
 
 
 References:
